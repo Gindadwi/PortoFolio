@@ -861,55 +861,60 @@
 
           <!-- Contact Form -->
           <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 fade-right">
-            <form id="contact-form" class="space-y-6">
-              <div>
-                <label class="block text-white font-medium mb-2">Nama</label>
-                <input
-                  type="text"
-                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
-                  placeholder="Nama Anda"
-                  required
-                />
-              </div>
+<div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 fade-right">
+  <form id="contact-form" class="space-y-6">
+    <div>
+      <label class="block text-white font-medium mb-2">Nama</label>
+      <input
+        type="text"
+        name="nama"
+        class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+        placeholder="Nama Anda"
+        required
+      />
+    </div>
 
-              <div>
-                <label class="block text-white font-medium mb-2">Email</label>
-                <input
-                  type="email"
-                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
-                  placeholder="email@example.com"
-                  required
-                />
-              </div>
+    <div>
+      <label class="block text-white font-medium mb-2">Email</label>
+      <input
+        type="email"
+        name="email"
+        class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+        placeholder="email@example.com"
+        required
+      />
+    </div>
 
-              <div>
-                <label class="block text-white font-medium mb-2">Subject</label>
-                <input
-                  type="text"
-                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
-                  placeholder="Subject pesan"
-                  required
-                />
-              </div>
+    <div>
+      <label class="block text-white font-medium mb-2">Subject</label>
+      <input
+        type="text"
+        name="subject"
+        class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+        placeholder="Subject pesan"
+        required
+      />
+    </div>
 
-              <div>
-                <label class="block text-white font-medium mb-2">Pesan</label>
-                <textarea
-                  rows="4"
-                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 resize-none"
-                  placeholder="Tulis pesan Anda..."
-                  required
-                ></textarea>
-              </div>
+    <div>
+      <label class="block text-white font-medium mb-2">Pesan</label>
+      <textarea
+        rows="4"
+        name="pesan"
+        class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 resize-none"
+        placeholder="Tulis pesan Anda..."
+        required
+      ></textarea>
+    </div>
 
-              <button
-                type="submit"
-                class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              >
-                <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
-              </button>
-            </form>
-          </div>
+    <button
+      type="submit"
+      class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+    >
+      <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
+    </button>
+  </form>
+</div>
         </div>
       </div>
     </section>
@@ -1000,16 +1005,36 @@
       .addEventListener("submit", function (e) {
         e.preventDefault();
 
-        // Show success message
+        // Ambil data dari form
+        const nama = this.querySelector('input[name="nama"]').value;
+        const email = this.querySelector('input[name="email"]').value;
+        const subject = this.querySelector('input[name="subject"]').value;
+        const pesan = this.querySelector('textarea[name="pesan"]').value;
+
+        // Nomor WhatsApp tujuan (ganti dengan nomor kamu)
+        const phoneNumber = "6281228900185"; // format internasional tanpa +
+
+        // Format pesan
+        const message = `Halo, saya *${nama}* (%20${email}%20)\n\n*Subject:* ${subject}\n\n*Pesan:*\n${pesan}`;
+
+        // Buat link WhatsApp
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+          message
+        )}`;
+
+        // Redirect ke WhatsApp
+        window.open(whatsappURL, "_blank");
+
+        // Efek tombol sukses
         const button = this.querySelector('button[type="submit"]');
         const originalText = button.innerHTML;
-
-        button.innerHTML = '<i class="fas fa-check mr-2"></i>Pesan Terkirim!';
+        button.innerHTML =
+          '<i class="fas fa-check mr-2"></i>Pesan Dialihkan ke WA...';
         button.classList.add("bg-green-500");
         button.classList.remove("bg-white", "text-purple-600");
         button.disabled = true;
 
-        // Reset form after 3 seconds
+        // Reset form & tombol setelah 3 detik
         setTimeout(() => {
           this.reset();
           button.innerHTML = originalText;
@@ -1018,7 +1043,6 @@
           button.disabled = false;
         }, 3000);
       });
-
     // Add scroll effect to navbar
     window.addEventListener("scroll", () => {
       const navbar = document.querySelector("nav");
