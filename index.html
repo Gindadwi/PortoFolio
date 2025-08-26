@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-item {
+        transition: all 0.3s ease;
+      }
+
+      .skill-item:hover {
+        transform: scale(1.05);
+      }
+
+      .typing-animation {
+        border-right: 2px solid #667eea;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          border-color: #667eea;
+        }
+        51%,
+        100% {
+          border-color: transparent;
+        }
+      }
+
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .scroll-smooth {
+        scroll-behavior: smooth;
+      }
+
+      .progress-bar {
+        width: 0%;
+        transition: width 1.5s ease-out;
+      }
+
+      .section-animate {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section-animate.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+      }
+
+      .fade-up.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .fade-left.animate-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .fade-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .fade-right.animate-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scale-in {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.6s ease-out;
+      }
+
+      .scale-in.animate-in {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .progress-bar.animate {
+        animation: progressFill 1.5s ease-out forwards;
+      }
+
+      @keyframes progressFill {
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: var(--target-width);
+        }
+      }
+
+      .skill-glow {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-glow::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .skill-glow:hover::before {
+        left: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Nav Menu -->
+    <nav class="p-4 shadow-md sticky top-0 z-10">
+      <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <h2
+          class="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+        >
+          Ginda.sann
+        </h2>
+
+        <!-- Mobile Menu Button -->
+        <button id="openMenu" class="md:hidden">
+          <svg
+            class="w-6 h-6 text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- Navigation Links -->
+        <div id="menu" class="hidden md:flex space-x-4 items-center">
+          <a
+            href="#home"
+            class="py-2 px-3 font-semibold text-gray-700 hover:text-purple-600 hover:bg-gray-100 rounded transition-colors"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="py-2 px-3 font-semibold text-gray-700 hover:text-purple-600 hover:bg-gray-100 rounded transition-colors"
+            >About</a
+          >
+          <a
+            href="#skills"
+            class="py-2 px-3 font-semibold text-gray-700 hover:text-purple-600 hover:bg-gray-100 rounded transition-colors"
+            >Skills</a
+          >
+          <a
+            href="#projects"
+            class="py-2 px-3 font-semibold text-gray-700 hover:text-purple-600 hover:bg-gray-100 rounded transition-colors"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="py-2 px-3 font-semibold text-gray-700 hover:text-purple-600 hover:bg-gray-100 rounded transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+    <!-- Off-canvas menu -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 right-0 w-3/4 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="flex justify-end p-4">
+        <button id="closeMenu">
+          <svg
+            class="w-6 h-6 text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <ul class="flex flex-col px-6 space-y-4 text-lg font-medium">
+        <li><a href="#home" class="hover:text-purple-600">Home</a></li>
+        <li><a href="#skills" class="hover:text-purple-600">Skill</a></li>
+        <li><a href="#projects" class="hover:text-purple-600">Project</a></li>
+        <li><a href="#about" class="hover:text-purple-600">About</a></li>
+        <li><a href="#contact" class="hover:text-purple-600">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="relative z-10 text-center text-white px-4">
+        <div class="floating">
+          <div
+            class="w-32 h-32 mx-auto mb-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"
+          >
+            <i class="fas fa-code text-4xl text-white"></i>
+          </div>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">Ginda Dwi Pamungkas</h1>
+        <p class="text-xl md:text-2xl mb-8 typing-animation" id="typing-text">
+          Frontend Developer
+        </p>
+        <p class="text-lg mb-8 max-w-2xl mx-auto opacity-90">
+          Lulusan Universitas Amikom Purwokerto yang passionate dalam
+          menciptakan pengalaman web yang menakjubkan
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#projects"
+            class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Lihat Portfolio
+          </a>
+          <a
+            href="#contact"
+            class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors"
+          >
+            Hubungi Saya
+          </a>
+        </div>
+      </div>
+
+      <!-- Floating Elements -->
+      <div
+        class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full floating"
+        style="animation-delay: -2s"
+      ></div>
+      <div
+        class="absolute bottom-20 right-10 w-16 h-16 bg-white/10 rounded-full floating"
+        style="animation-delay: -4s"
+      ></div>
+      <div
+        class="absolute top-1/2 left-20 w-12 h-12 bg-white/10 rounded-full floating"
+        style="animation-delay: -1s"
+      ></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white section-animate">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">Tentang Saya</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Seorang Frontend Developer yang berdedikasi untuk menciptakan
+            pengalaman digital yang luar biasa
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6 fade-left">
+            <h3 class="text-2xl font-semibold text-gray-800">
+              Halo! Saya Ginda 👋
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Saya adalah seorang Frontend Developer yang passionate dalam
+              menciptakan antarmuka web yang indah dan fungsional. Sebagai
+              lulusan Universitas Amikom Purwokerto, saya memiliki fondasi yang
+              kuat dalam pengembangan web modern.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              Saya senang bekerja dengan teknologi terbaru dan selalu eager
+              untuk belajar hal-hal baru. Fokus saya adalah menciptakan
+              pengalaman pengguna yang seamless dan engaging.
+            </p>
+
+            <div class="flex flex-wrap gap-4 pt-4">
+              <div class="flex items-center gap-2 text-purple-600">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="font-medium">Universitas Amikom Purwokerto</span>
+              </div>
+              <div class="flex items-center gap-2 text-purple-600">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="font-medium">Purwokerto, Indonesia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative fade-right">
+            <div
+              class="bg-gradient-to-br from-purple-400 to-blue-500 rounded-2xl p-8 text-white"
+            >
+              <div class="grid grid-cols-2 gap-6">
+                <div class="text-center">
+                  <div class="text-3xl font-bold">2+</div>
+                  <div class="text-sm opacity-90">Years Experience</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold">15+</div>
+                  <div class="text-sm opacity-90">Projects Done</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold">8+</div>
+                  <div class="text-sm opacity-90">Technologies</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold">100%</div>
+                  <div class="text-sm opacity-90">Client Satisfaction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 section-animate">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">
+            Skills & Technologies
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Teknologi dan tools yang saya kuasai untuk mengembangkan aplikasi
+            web modern
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+          <!-- Frontend Skills -->
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fab fa-react text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">React</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-sm"
+                data-width="90"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">90%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-cyan-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-wind text-2xl text-cyan-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Tailwind CSS</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-cyan-500 to-cyan-600 h-3 rounded-full shadow-sm"
+                data-width="95"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">95%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fab fa-html5 text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">HTML</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-orange-500 to-orange-600 h-3 rounded-full shadow-sm"
+                data-width="95"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">95%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fab fa-css3-alt text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">CSS</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-sm"
+                data-width="90"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">90%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fab fa-js-square text-2xl text-yellow-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">JavaScript</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-yellow-500 to-yellow-600 h-3 rounded-full shadow-sm"
+                data-width="85"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">85%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fab fa-node-js text-2xl text-green-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Express.js</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full shadow-sm"
+                data-width="80"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">80%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-database text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">MySQL</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-sm"
+                data-width="75"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">75%</div>
+          </div>
+
+          <div
+            class="skill-item bg-white p-6 rounded-xl shadow-sm card-hover text-center"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-fire text-2xl text-orange-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Firebase</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 skill-glow">
+              <div
+                class="progress-bar bg-gradient-to-r from-orange-500 to-orange-600 h-3 rounded-full shadow-sm"
+                data-width="85"
+              ></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">85%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white section-animate">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">
+            Featured Projects
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Beberapa project yang telah saya kerjakan menggunakan teknologi
+            modern
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+            <div
+              class="h-48 bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-building text-4xl text-white"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">LAZAS AL IRSYAD</h3>
+              <p class="text-gray-600 mb-4">
+                Website Lembaga Zakat LAZNAS AL IRSYAD
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                  >Wordpress</span
+                >
+                <span
+                  class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm"
+                  >Elemtentor Pro</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="window.location.href='https://laznasalirsyad.org/'"
+                  class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <i class="fas fa-eye mr-2"></i>Demo
+                </button>
+                <button
+                  class="flex-1 border border-purple-600 text-purple-600 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                >
+                  <i class="fab fa-github mr-2"></i>Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+            <div
+              class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-school text-4xl text-white"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">PPDB Sekolah</h3>
+              <p class="text-gray-600 mb-4">
+                Aplikasi Pendaftaran siswa baru untuk SMP
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                  >React</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm"
+                  >Firebase</span
+                >
+                <span
+                  class="px-3 py-1 bg-cyan-100 text-cyan-600 rounded-full text-sm"
+                  >Tailwind</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="window.location.href='https://ppdb-smp-muh-sumbang.vercel.app/'"
+                  class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <i class="fas fa-eye mr-2"></i>Demo
+                </button>
+                <button
+                  class="flex-1 border border-purple-600 text-purple-600 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                >
+                  <i class="fab fa-github mr-2"></i>Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+            <div
+              class="h-48 bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-utensils text-4xl text-white"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Kitchen Craft</h3>
+              <p class="text-gray-600 mb-4">Platform resep masakan</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm"
+                  >React</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                  >Express</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm"
+                  >Mongo DB</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="window.location.href='https://www.kitchencraft.site/'"
+                  class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <i class="fas fa-eye mr-2"></i>Demo
+                </button>
+                <button
+                  class="flex-1 border border-purple-600 text-purple-600 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                >
+                  <i class="fab fa-github mr-2"></i>Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+            <div
+              class="h-48 bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-bowl-food text-4xl text-white"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">UMKM Nyah Siok</h3>
+              <p class="text-gray-600 mb-4">
+                Website umkm untuk jual beli dimsum
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm"
+                  >HTML</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                  >CSS</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm"
+                  >Java Script</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="window.location.href='https://gindadwi.github.io/Umkm/'"
+                  class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <i class="fas fa-eye mr-2"></i>Demo
+                </button>
+                <button
+                  class="flex-1 border border-purple-600 text-purple-600 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                >
+                  <i class="fab fa-github mr-2"></i>Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+            <div
+              class="h-48 bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fa fa-paperclip text-4xl text-white"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Digital Home Visit</h3>
+              <p class="text-gray-600 mb-4">
+                Website sistem pencatatan kunjungan ke rumah siswa
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm"
+                  >HTML</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                  >Tailwind</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm"
+                  >Java Script</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-green-800 rounded-full text-sm"
+                  >Supabase</span
+                >
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="window.location.href='https://homevisit-level2.vercel.app/'"
+                  class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <i class="fas fa-eye mr-2"></i>Demo
+                </button>
+                <button
+                  class="flex-1 border border-purple-600 text-purple-600 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                >
+                  <i class="fab fa-github mr-2"></i>Code
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg section-animate">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">
+            Mari Berkolaborasi!
+          </h2>
+          <p class="text-white/90 max-w-2xl mx-auto">
+            Punya project menarik? Mari diskusikan bagaimana kita bisa bekerja
+            sama
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Contact Info -->
+          <div class="space-y-8 fade-left">
+            <div class="flex items-center gap-4 text-white">
+              <div
+                class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-envelope text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold">Email</h3>
+                <p class="opacity-90">gindadwi144@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 text-white">
+              <div
+                class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-phone text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold">Phone</h3>
+                <p class="opacity-90">+6281228900185</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 text-white">
+              <div
+                class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-map-marker-alt text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold">Location</h3>
+                <p class="opacity-90">Purwokerto, Indonesia</p>
+              </div>
+            </div>
+
+            <div class="pt-8">
+              <h3 class="text-white font-semibold mb-4">Follow Me</h3>
+              <div class="flex gap-4">
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                >
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                >
+                  <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                >
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                >
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 fade-right">
+            <form id="contact-form" class="space-y-6">
+              <div>
+                <label class="block text-white font-medium mb-2">Nama</label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+                  placeholder="Nama Anda"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="block text-white font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+                  placeholder="email@example.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="block text-white font-medium mb-2">Subject</label>
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+                  placeholder="Subject pesan"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="block text-white font-medium mb-2">Pesan</label>
+                <textarea
+                  rows="4"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 resize-none"
+                  placeholder="Tulis pesan Anda..."
+                  required
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-white text-purple-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-gray-400">© 2025 Ginda Dwi Pamungkas.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    // Mobile menu toggle
+    const openBtn = document.getElementById("openMenu");
+    const closeBtn = document.getElementById("closeMenu");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    openBtn.addEventListener("click", () => {
+      mobileMenu.classList.remove("translate-x-full");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      mobileMenu.classList.add("translate-x-full");
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+        // Close mobile menu if open
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Typing animation
+    const typingText = document.getElementById("typing-text");
+    const texts = [
+      "Frontend Developer",
+      "React Specialist",
+      "UI/UX Enthusiast",
+      "Web Developer",
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeWriter() {
+      const currentText = texts[textIndex];
+
+      if (isDeleting) {
+        typingText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 100 : 150;
+
+      if (!isDeleting && charIndex === currentText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(typeWriter, typeSpeed);
+    }
+
+    // Start typing animation
+    typeWriter();
+
+    // Contact form handling
+    document
+      .getElementById("contact-form")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Show success message
+        const button = this.querySelector('button[type="submit"]');
+        const originalText = button.innerHTML;
+
+        button.innerHTML = '<i class="fas fa-check mr-2"></i>Pesan Terkirim!';
+        button.classList.add("bg-green-500");
+        button.classList.remove("bg-white", "text-purple-600");
+        button.disabled = true;
+
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          this.reset();
+          button.innerHTML = originalText;
+          button.classList.remove("bg-green-500");
+          button.classList.add("bg-white", "text-purple-600");
+          button.disabled = false;
+        }, 3000);
+      });
+
+    // Add scroll effect to navbar
+    window.addEventListener("scroll", () => {
+      const navbar = document.querySelector("nav");
+      if (window.scrollY > 100) {
+        navbar.classList.add("bg-white/95");
+        navbar.classList.remove("bg-white/90");
+      } else {
+        navbar.classList.add("bg-white/90");
+        navbar.classList.remove("bg-white/95");
+      }
+    });
+
+    // Animate elements on scroll with repeat functionality
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        } else {
+          entry.target.style.opacity = "0";
+          entry.target.style.transform = "translateY(30px)";
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and skill items
+    document.querySelectorAll(".card-hover, .skill-item").forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(30px)";
+      el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      observer.observe(el);
+    });
+
+    // Progress bar animation with repeat functionality
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const progressBar = entry.target.querySelector(".progress-bar");
+          if (progressBar) {
+            if (entry.isIntersecting) {
+              // Reset and animate progress bar
+              const targetWidth = progressBar.getAttribute("data-width");
+              progressBar.style.setProperty(
+                "--target-width",
+                targetWidth + "%"
+              );
+
+              // Reset width first
+              progressBar.style.width = "0%";
+              progressBar.classList.remove("animated");
+
+              // Add staggered animation delay
+              const skillItems = Array.from(
+                document.querySelectorAll(".skill-item")
+              );
+              const index = skillItems.indexOf(entry.target);
+
+              setTimeout(() => {
+                progressBar.style.width = targetWidth + "%";
+                progressBar.classList.add("animated");
+              }, index * 200);
+            } else {
+              // Reset progress bar when leaving viewport
+              progressBar.style.width = "0%";
+              progressBar.classList.remove("animated");
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    // Observe skill items for progress animation
+    document.querySelectorAll(".skill-item").forEach((item) => {
+      progressObserver.observe(item);
+    });
+
+    // Section animations with repeat functionality
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Add animate-in class when entering viewport
+            entry.target.classList.add("animate-in");
+
+            // Animate child elements with staggered delay
+            const animatedElements = entry.target.querySelectorAll(
+              ".fade-up, .fade-left, .fade-right, .scale-in"
+            );
+            animatedElements.forEach((el, index) => {
+              setTimeout(() => {
+                el.classList.add("animate-in");
+              }, index * 200);
+            });
+          } else {
+            // Remove animate-in class when leaving viewport
+            entry.target.classList.remove("animate-in");
+
+            // Remove animation from child elements
+            const animatedElements = entry.target.querySelectorAll(
+              ".fade-up, .fade-left, .fade-right, .scale-in"
+            );
+            animatedElements.forEach((el) => {
+              el.classList.remove("animate-in");
+            });
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -150px 0px",
+      }
+    );
+
+    // Observe all sections with animations
+    document.querySelectorAll(".section-animate").forEach((section) => {
+      sectionObserver.observe(section);
+    });
+  </script>
+</html>
